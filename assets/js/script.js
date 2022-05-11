@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 checkAnswer();
             } else {
                 let gameType = this.getAttribute("data-type");
+                
                 runGame(gameType);
             }
         });
@@ -20,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     runGame("addition");
 
-})
+});
 /**
  * The main game "loop",called when the script is first loaded
  * and after user's aswert been processed
@@ -40,10 +41,10 @@ function runGame(gameType) {
         displayMultiplyQuestion(num1, num2);
     }
     else if(gameType ==="subtract"){
-        displaySubtractQuestion(num1,num2);
+        displaySubtractQuestion(num1, num2);
     }
     else if(gameType === "division"){
-        displayDivisonQuestion(num1,num2);
+        displayDivisionQuestion(num1, num2);
     } else {
         alert(`Unknown game type: ${gameType}`);
         throw `Unkown game type: ${gameType}. Aborting!`;
@@ -60,7 +61,7 @@ function checkAnswer() {
     let isCorrect = userAnswer === calculatedAnswer[0];
 
     if (isCorrect) {
-        alert("Hey! You got it right! :D")
+        alert("Hey! You got it right! :D");
         incrementScore();
     } else {
         alert(`Awww...you answered ${userAnswer}.The correct answer was ${calculatedAnswer[0]}!`);
@@ -91,8 +92,8 @@ function calculateCorrectAnswer() {
     else if (operator === 'x') {
         return [operand1 * operand2, 'multiply'];
     }
-    else if(operator === '%'){
-        return[operand1 / operand2, 'division'];
+    else if(operator === "/"){
+        return[operand1 / operand2 >>0, "division"];
     } else {
         alert `Unimplemented operator ${operator}`;
         throw `Unimplemented operator ${operator}. Aborting!`;
@@ -144,9 +145,10 @@ function displayMultiplyQuestion(operand1, operand2) {
 }
 
 function displayDivisionQuestion(operand1, operand2){
+    operand1 = operand1 * operand2;
     
-    document.getElementById('operand1').textContent = operand1> operand2 ? operand1 : operand2;
-    document.getElementById('operand2').textContent = operand1> operand2 ? operand2 : operand1;
-    document.getElementById('operator').textContent = "%";
+    document.getElementById("operand1").textContent = operand1;
+    document.getElementById("operand2").textContent = operand2;
+    document.getElementById("operator").textContent = "/";
 
 }
